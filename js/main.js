@@ -157,8 +157,12 @@ function displayContent(content) {
   // Highlight the selected sub-bab
   const sidebar = document.querySelector(".sidebar");
   const target = event.target;
+    
+  // Remove 'active' class from all sub-materi
+    const subLiActive = document.querySelectorAll(".activeli");
+    subLiActive.forEach((item) => item.classList.remove("activeli"));
   if (target.tagName === "LI") {
-    target.classList.add("active");
+    target.classList.add("activeli");
     if (window.innerWidth <= 768 && sidebar.classList.contains("active")) {
       sidebar.classList.remove("active");
       sidebar.classList.add("inactive");

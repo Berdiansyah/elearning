@@ -488,3 +488,10 @@
 		display: block; /* Tombol hanya muncul pada mobile */
 	}
 }
+
+.activeli{
+    color: rgb(0, 0, 0) !important;
+    font-weight: bold !important;
+    border-radius: 230px;
+    background-color: white !important;
+}
