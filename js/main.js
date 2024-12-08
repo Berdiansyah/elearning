@@ -102,70 +102,91 @@
   });
 })(jQuery);
 
- // Fungsi untuk membangun sidebar
+// Fungsi untuk membangun sidebar
 function buildSidebar(data) {
-	const sidebarElement = document.getElementById("sidebar");
+  const sidebarElement = document.getElementById("sidebar");
 
-	data.forEach((item, index) => {
-		// Elemen utama (Modul/Test)
-		const listItem = document.createElement("li");
-		listItem.classList.add("list-group-item", "bg-primary", "text-white", "tree-item");
-		listItem.textContent = item.title;
+  data.forEach((item, index) => {
+    // Elemen utama (Modul/Test)
+    const listItem = document.createElement("li");
+    listItem.classList.add(
+      "list-group-item",
+      "bg-primary",
+      "text-white",
+      "tree-item"
+    );
+    listItem.textContent = item.title;
 
-		sidebarElement.appendChild(listItem);
+    sidebarElement.appendChild(listItem);
 
-		// Submateri
-		const subMateriList = document.createElement("ul");
-		subMateriList.id = `subMateri-${index}`;
-		subMateriList.classList.add("sub-materi", "list-group", "list-group-flush");
+    // Submateri
+    const subMateriList = document.createElement("ul");
+    subMateriList.id = `subMateri-${index}`;
+    subMateriList.classList.add("sub-materi", "list-group", "list-group-flush");
 
-		item.subMateri.forEach((subItem) => {
-			const subMateriItem = document.createElement("li");
-			subMateriItem.classList.add("list-group-item", "text-white");
-			subMateriItem.style.backgroundColor = "transparent";
-			subMateriItem.style.cursor = "pointer";
-			subMateriItem.textContent = subItem.title;
+    item.subMateri.forEach((subItem) => {
+      const subMateriItem = document.createElement("li");
+      subMateriItem.classList.add("list-group-item", "text-white");
+      subMateriItem.style.backgroundColor = "transparent";
+      subMateriItem.style.cursor = "pointer";
+			subMateriItem.style.paddingLeft = "50px";
+      subMateriItem.textContent = subItem.title;
 
-			subMateriItem.onclick = (e) => {
-				e.stopPropagation(); // Hindari trigger parent
-				displayContent(subItem.content);
-			};
+      subMateriItem.onclick = (e) => {
+        e.stopPropagation(); // Hindari trigger parent
+        displayContent(subItem.content);
+      };
 
-			subMateriList.appendChild(subMateriItem);
-		});
+      subMateriList.appendChild(subMateriItem);
+    });
 
-		sidebarElement.appendChild(subMateriList);
+    sidebarElement.appendChild(subMateriList);
 
-		listItem.onclick = () => toggleSubMateri(`subMateri-${index}`);
-	});
+    listItem.onclick = () => toggleSubMateri(`subMateri-${index}`);
+  });
 }
 
 // Fungsi untuk menampilkan konten
 function displayContent(content) {
-	const contentArea = document.getElementById("contentArea");
+  const contentArea = document.getElementById("contentArea");
 
-	// Konten teks HTML biasa
-	if (typeof content === "string") {
-		contentArea.innerHTML = content;
-		return;
-	}
+  // Remove 'active' class from all sub-materi
+  const subMateriItems = document.querySelectorAll(".sub-materi li");
+  subMateriItems.forEach((item) => item.classList.remove("active"));
 
-	// Konten soal
-	if (typeof content === "object" && content.questions) {
-		contentArea.innerHTML = ""; // Bersihkan area konten
+  // Highlight the selected sub-bab
+  const sidebar = document.querySelector(".sidebar");
+  const target = event.target;
+  if (target.tagName === "LI") {
+    target.classList.add("active");
+    if (window.innerWidth <= 768 && sidebar.classList.contains("active")) {
+      sidebar.classList.remove("active");
+      sidebar.classList.add("inactive");
+    } 
+  }
 
-		const quizForm = document.createElement("form");
-		quizForm.id = "quizForm";
+  // Konten teks HTML biasa
+  if (typeof content === "string") {
+    contentArea.innerHTML = content;
+    return;
+  }
 
-		// Render soal
-		content.questions.forEach((question, index) => {
-			const questionDiv = document.createElement("div");
-			questionDiv.classList.add("mb-3");
+  // Konten soal
+  if (typeof content === "object" && content.questions) {
+    contentArea.innerHTML = ""; // Bersihkan area konten
 
-			questionDiv.innerHTML = `<h5>${index + 1}. ${question.question}</h5>`;
+    const quizForm = document.createElement("form");
+    quizForm.id = "quizForm";
 
-			question.options.forEach((option) => {
-				questionDiv.innerHTML += `
+    // Render soal
+    content.questions.forEach((question, index) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.classList.add("mb-3");
+
+      questionDiv.innerHTML = `<h5>${index + 1}. ${question.question}</h5>`;
+
+      question.options.forEach((option) => {
+        questionDiv.innerHTML += `
 					<div class="form-check">
 						<input
 							class="form-check-input"
@@ -179,71 +200,127 @@ function displayContent(content) {
 						</label>
 					</div>
 				`;
-			});
+      });
 
-			quizForm.appendChild(questionDiv);
-		});
+      quizForm.appendChild(questionDiv);
+    });
 
-		// Tombol Submit
-		const submitButton = document.createElement("button");
-		submitButton.type = "button";
-		submitButton.classList.add("btn", "btn-primary", "mt-3");
-		submitButton.textContent = "Submit Jawaban";
-		submitButton.onclick = () => evaluateQuiz(content.questions);
+    // Tombol Submit
+    const submitButton = document.createElement("button");
+    submitButton.type = "button";
+    submitButton.classList.add("btn", "btn-primary", "mt-3");
+    submitButton.textContent = "Submit Jawaban";
+    submitButton.onclick = () => evaluateQuiz(content.questions);
 
-		contentArea.appendChild(quizForm);
-		contentArea.appendChild(submitButton);
-	}
+    contentArea.appendChild(quizForm);
+    contentArea.appendChild(submitButton);
+  }
 }
 
 // Fungsi untuk mengevaluasi jawaban
 function evaluateQuiz(questions) {
-	let correctCount = 0;
-	const resultDiv = document.createElement("div");
-	resultDiv.id = "quizResult";
-	resultDiv.classList.add("mt-4");
+  let correctCount = 0;
+  const resultDiv = document.createElement("div");
+  resultDiv.id = "quizResult";
+  resultDiv.classList.add("mt-4");
 
-	questions.forEach((question, index) => {
-		const selectedOption = document.querySelector(
-			`input[name="question${index}"]:checked`
-		);
+  questions.forEach((question, index) => {
+    const selectedOption = document.querySelector(
+      `input[name="question${index}"]:checked`
+    );
 
-		const isCorrect = selectedOption && selectedOption.value === question.answer;
-		if (isCorrect) {
-			correctCount++;
-		}
+    const isCorrect =
+      selectedOption && selectedOption.value === question.answer;
+    if (isCorrect) {
+      correctCount++;
+    }
 
-		// Hasil tiap soal
-		resultDiv.innerHTML += `
+    // Hasil tiap soal
+    resultDiv.innerHTML += `
 			<p>
 				<strong>${index + 1}. ${question.question}</strong><br />
 				Jawaban Anda: ${selectedOption ? selectedOption.value : "Tidak dijawab"} 
-				(${isCorrect ? '<span class="text-success">Benar</span>' : '<span class="text-danger">Salah</span>'})<br />
+				(${
+          isCorrect
+            ? '<span class="text-success">Benar</span>'
+            : '<span class="text-danger">Salah</span>'
+        })<br />
 				Kunci Jawaban: ${question.answer}
 			</p>
 		`;
-	});
+  });
 
-	// Hitung skor dalam bentuk persentase
+  // Hitung skor dalam bentuk persentase
   const scorePercentage = (correctCount / questions.length) * 100;
 
-	resultDiv.innerHTML += `<p><strong>Skor Anda:</strong> ${scorePercentage}</p>`;
-	resultDiv.innerHTML += `<p><strong>Jawaban Anda:</strong> ${correctCount}/${questions.length}</p>`;
+  resultDiv.innerHTML += `<p><strong>Skor Anda:</strong> ${scorePercentage}</p>`;
+  resultDiv.innerHTML += `<p><strong>Jawaban Anda:</strong> ${correctCount}/${questions.length}</p>`;
 
-	const contentArea = document.getElementById("contentArea");
-	contentArea.appendChild(resultDiv);
+  const contentArea = document.getElementById("contentArea");
+  contentArea.appendChild(resultDiv);
 }
 
 // Toggle sub-materi
 function toggleSubMateri(id) {
-	const subMateri = document.getElementById(id);
-	subMateri.style.display =
-		subMateri.style.display === "none" || subMateri.style.display === ""
-			? "block"
-			: "none";
+  const subMateri = document.getElementById(id);
+  subMateri.style.display =
+    subMateri.style.display === "none" || subMateri.style.display === ""
+      ? "block"
+      : "none";
 }
+
+// Update toggleSubMateri function to handle active sub-materi
+function toggleSubMateri(id) {
+  const subMateri = document.getElementById(id);
+  const allSubMateri = document.querySelectorAll(".sub-materi");
+
+  // Collapse all other sub-materi
+  allSubMateri.forEach((item) => {
+    if (item.id !== id) {
+      item.style.display = "none";
+    }
+  });
+
+  // Toggle the current one
+  subMateri.style.display =
+    subMateri.style.display === "none" || subMateri.style.display === ""
+      ? "block"
+      : "none";
+}
+
+// Toggle sidebar visibility on mobile
+document.querySelector(".sidebar-toggle-btn").addEventListener("click", () => {
+  const sidebar = document.querySelector(".sidebar");
+  sidebar.classList.toggle("active");
+  sidebar.classList.toggle("inactive");
+});
+
+// Ensure sidebar is always visible on desktop
+window.addEventListener("resize", () => {
+  const sidebar = document.querySelector(".sidebar");
+  if (window.innerWidth > 768) {
+    sidebar.classList.remove("inactive");
+    sidebar.classList.remove("sidebar-mobile");
+    sidebar.classList.add("sidebar");
+    sidebar.classList.add("active");
+  } else {
+    sidebar.classList.remove("active");
+    sidebar.classList.add("inactive");
+    sidebar.classList.add("sidebar-mobile");
+  }
+});
+
+// Initialize sidebar state based on window size
+document.addEventListener("DOMContentLoaded", () => {
+  const sidebar = document.querySelector(".sidebar");
+  if (window.innerWidth > 768) {
+    sidebar.classList.add("active");
+  } else {
+    sidebar.classList.add("inactive");
+  }
+});
 
 // Bangun sidebar
 document.addEventListener("DOMContentLoaded", () => {
-	buildSidebar(sidebarData);
+  buildSidebar(sidebarData);
 });
