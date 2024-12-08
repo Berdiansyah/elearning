@@ -121,8 +121,9 @@ function buildSidebar(data) {
 
 		item.subMateri.forEach((subItem) => {
 			const subMateriItem = document.createElement("li");
-			subMateriItem.classList.add("list-group-item", "sublist", "text-white");
+			subMateriItem.classList.add("list-group-item", "text-white");
 			subMateriItem.style.backgroundColor = "transparent";
+			subMateriItem.style.cursor = "pointer";
 			subMateriItem.textContent = subItem.title;
 
 			subMateriItem.onclick = (e) => {
