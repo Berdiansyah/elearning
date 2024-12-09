@@ -126,15 +126,30 @@ function buildSidebar(data) {
 
     item.subMateri.forEach((subItem) => {
       const subMateriItem = document.createElement("li");
-      subMateriItem.classList.add("list-group-item", "text-white");
+      subMateriItem.classList.add("list-group-item", "text-white", "sub-item");
       subMateriItem.style.backgroundColor = "transparent";
       subMateriItem.style.cursor = "pointer";
-			subMateriItem.style.paddingLeft = "50px";
-      subMateriItem.textContent = subItem.title;
+      subMateriItem.style.paddingLeft = "30px";
 
+      // Elemen lingkaran
+      const indicator = document.createElement("span");
+      indicator.classList.add("indicator");
+      subMateriItem.appendChild(indicator);
+
+      // Teks sub bab
+      const text = document.createElement("span");
+      text.textContent = subItem.title;
+      subMateriItem.appendChild(text);
+      // subMateriItem.textContent = subItem.title;
+
+      // Event handler klik
       subMateriItem.onclick = (e) => {
         e.stopPropagation(); // Hindari trigger parent
         displayContent(subItem.content);
+
+        subMateriItem.classList.add('activeli')
+        // Ubah warna lingkaran menjadi hijau
+        indicator.classList.add("clicked");
       };
 
       subMateriList.appendChild(subMateriItem);
@@ -157,16 +172,16 @@ function displayContent(content) {
   // Highlight the selected sub-bab
   const sidebar = document.querySelector(".sidebar");
   const target = event.target;
-    
+
   // Remove 'active' class from all sub-materi
-    const subLiActive = document.querySelectorAll(".activeli");
-    subLiActive.forEach((item) => item.classList.remove("activeli"));
+  const subLiActive = document.querySelectorAll(".activeli");
+  subLiActive.forEach((item) => item.classList.remove("activeli"));
   if (target.tagName === "LI") {
     target.classList.add("activeli");
     if (window.innerWidth <= 768 && sidebar.classList.contains("active")) {
       sidebar.classList.remove("active");
       sidebar.classList.add("inactive");
-    } 
+    }
   }
 
   // Konten teks HTML biasa
@@ -191,19 +206,19 @@ function displayContent(content) {
 
       question.options.forEach((option) => {
         questionDiv.innerHTML += `
-					<div class="form-check">
-						<input
-							class="form-check-input"
-							type="radio"
-							name="question${index}"
-							value="${option.value}"
-							id="question${index}-${option.value}"
-						/>
-						<label class="form-check-label" for="question${index}-${option.value}">
-							${option.value}. ${option.text}
-						</label>
-					</div>
-				`;
+          <div class="form-check">
+            <input
+              class="form-check-input"
+              type="radio"
+              name="question${index}"
+              value="${option.value}"
+              id="question${index}-${option.value}"
+            />
+            <label class="form-check-label" for="question${index}-${option.value}">
+              ${option.value}. ${option.text}
+            </label>
+          </div>
+        `;
       });
 
       quizForm.appendChild(questionDiv);
@@ -220,6 +235,7 @@ function displayContent(content) {
     contentArea.appendChild(submitButton);
   }
 }
+
 
 // Fungsi untuk mengevaluasi jawaban
 function evaluateQuiz(questions) {

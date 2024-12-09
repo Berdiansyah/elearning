@@ -67,17 +67,6 @@ const sidebarData = [
         `,
       },
       {
-        title: "PERTANYAAN PEMANTIK",
-        content: `
-        <h5>Pertanyaan Pemantik</h5>
-
-        <ol>
-          <li>Apa yang dimaksud dengan peluang?</li>
-          <li>Ada berapa kemungkinan hasil melempar sebuah dadu normal?/li>
-        </ol>
-        `,
-      },
-      {
         title: "BAHAN AJAR",
         content: `
         <h4>A. PERCOBAAN, RUANG SAMPEL, TITIK SAMPEL, DAN KEJADIAN</h4>
