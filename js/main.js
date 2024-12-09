@@ -147,7 +147,7 @@ function buildSidebar(data) {
         e.stopPropagation(); // Hindari trigger parent
         displayContent(subItem.content);
 
-        subMateriItem.classList.add('activeli')
+        subMateriItem.classList.add("activeli");
         // Ubah warna lingkaran menjadi hijau
         indicator.classList.add("clicked");
       };
@@ -164,6 +164,12 @@ function buildSidebar(data) {
 // Fungsi untuk menampilkan konten
 function displayContent(content) {
   const contentArea = document.getElementById("contentArea");
+
+  // Simpan data konten untuk memungkinkan reset
+  contentArea.dataset.quizData = JSON.stringify(content);
+
+  // Bersihkan area konten
+  contentArea.innerHTML = "";
 
   // Remove 'active' class from all sub-materi
   const subMateriItems = document.querySelectorAll(".sub-materi li");
@@ -236,10 +242,17 @@ function displayContent(content) {
   }
 }
 
-
 // Fungsi untuk mengevaluasi jawaban
 function evaluateQuiz(questions) {
   let correctCount = 0;
+  const contentArea = document.getElementById("contentArea");
+
+  // Cek jika sudah ada hasil sebelumnya
+  const existingResult = document.getElementById("quizResult");
+  if (existingResult) {
+    return; // Mencegah submit ulang sebelum reset
+  }
+
   const resultDiv = document.createElement("div");
   resultDiv.id = "quizResult";
   resultDiv.classList.add("mt-4");
@@ -274,10 +287,31 @@ function evaluateQuiz(questions) {
   const scorePercentage = (correctCount / questions.length) * 100;
 
   resultDiv.innerHTML += `<p><strong>Skor Anda:</strong> ${scorePercentage}</p>`;
-  resultDiv.innerHTML += `<p><strong>Jawaban Anda:</strong> ${correctCount}/${questions.length}</p>`;
+  resultDiv.innerHTML += `<p><strong>Jawaban Anda yang benar adalah:</strong> ${correctCount}/${questions.length}</p>`;
 
-  const contentArea = document.getElementById("contentArea");
   contentArea.appendChild(resultDiv);
+
+  // Tampilkan tombol reset
+  const resetButton = document.createElement("button");
+  resetButton.type = "button";
+  resetButton.classList.add("btn", "btn-secondary", "mt-3");
+  resetButton.textContent = "Reset";
+  resetButton.onclick = () => resetQuiz();
+
+  contentArea.appendChild(resetButton);
+}
+
+// Fungsi untuk reset quiz
+function resetQuiz() {
+  const contentArea = document.getElementById("contentArea");
+
+  // Bersihkan area konten
+  contentArea.innerHTML = "";
+  // Ambil data JSON dari dataset
+  const quizData = JSON.parse(contentArea.dataset.quizData);
+
+  // Bangun ulang quiz, termasuk soal dan tombol submit
+  displayContent(quizData);
 }
 
 // Toggle sub-materi
