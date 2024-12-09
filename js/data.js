@@ -9,7 +9,7 @@ const sidebarData = [
         <h5>Kompetensi Awal</h5>
 
         <ol>
-        <li>Peserta didik mampu mendeskripsikan dan menentukan peluang</li>
+        <li>Peserta didik mampu mendeskripsikan dan menentukan peluang.</li>
         <li>Peserta didik mampu menyelesaikan masalah yang berkaitan dengan peluang.</li>
         </ol>
         `,
@@ -28,9 +28,9 @@ const sidebarData = [
         <h5>Profil Pelajar Pancasila</h5>
 
         <ol>
-          <li>Beriman, bertakwa kepada Tuhan Yang MahaEsa, dan Berakhlak Mulia</li>
-          <li>Gotong Royong</li>
-          <li>Berpikir Kritis</li>
+          <li>Beriman, bertakwa kepada Tuhan Yang MahaEsa, dan Berakhlak Mulia.</li>
+          <li>Gotong Royong.</li>
+          <li>Berpikir Kritis.</li>
         </ol>
         `,
       },
@@ -49,7 +49,7 @@ const sidebarData = [
 
         <ol>
           <li>Peserta didik dapat mengetahui cara menentukan ruang sampel dan titik sampel.</li>
-          <li>Peserta didik dapat mengetahui cara mencari peluang mata dadu./li>
+          <li>Peserta didik dapat mengetahui cara mencari peluang mata dadu.</li>
           <li>Peserta didik dapat mengetahui cara mencari frekuensin harapan.</li>
         </ol>
         `,
@@ -61,7 +61,7 @@ const sidebarData = [
 
         <ol>
           <li>Mengetahui cara menentukan ruang sampel dan titik sampel.</li>
-          <li>Mengetahui cara mencari peluang suatu kejadian./li>
+          <li>Mengetahui cara mencari peluang suatu kejadian.</li>
           <li>Mengetahui cara mencari frekuensi harapan.</li>
         </ol>
         `,
@@ -90,17 +90,27 @@ const sidebarData = [
         <p style="padding-left:15px">Kejadian adalah hasil diharapkan terjadi pada ruang sampel. Kejadian dinotasikan sebagai A. Dengan demikian, banyaknya kejadian A dinotasikan sebagai n(A). Misalnya, berapakah banyaknya kejadian muncul 1 A dan 1 G pada pelemparan dua buah koin? Munculnya 1 A dan 1 G bisa diperoleh dari {(A,G), (G,A)}. Dengan demikian, banyaknya kejadian muncul 1 A dan 1 G adalah 2.</p>
         <p style="padding-left:15px"><strong>Contoh</strong></p>
         <p style="padding-left:15px">Eksperimen</p>
-        <p style="padding-left:15px">Melambungkan sebuah dadu satu kali dan dilihat banyaknya mata dadu yang tampak/muncul</p>
+        <p style="padding-left:15px">Melambungkan sebuah dadu satu kali dan dilihat banyaknya mata dadu yang tampak/muncul.</p>
         <p style="padding-left:15px">Ruang sampel</p>
-        <p style="padding-left:15px">Dadu mempunyai 6 sisi, dan masing-masing sisi bermata satu, dua,tiga, empat, lima dan enam. Jadi S = {1, 2, 3, 4, 5, 6}</p>
+        <p style="padding-left:15px">Dadu mempunyai 6 sisi, dan masing-masing sisi bermata satu, dua,tiga, empat, lima dan enam. Jadi S = {1, 2, 3, 4, 5, 6}.</p>
         <p style="padding-left:15px">Titik sampel</p>
-        <p style="padding-left:15px">Titik sampel merupakan suatu elemen dari ruang sampel S. elemen-elemen dari S adalah : 1, 2, 3, 4, 5, 6. jadi titik sampelnya : 1 atau 2 atau 3 atau 4 atau 5 atau 6</p>
+        <p style="padding-left:15px">Titik sampel merupakan suatu elemen dari ruang sampel S. elemen-elemen dari S adalah : 1, 2, 3, 4, 5, 6. jadi titik sampelnya : 1 atau 2 atau 3 atau 4 atau 5 atau 6.</p>
         <p style="padding-left:15px">Kejadian</p>
-        <p style="padding-left:15px">Kejadian merupakan himpunan bagian dari ruang sampel</p>
+        <p style="padding-left:15px">Kejadian merupakan himpunan bagian dari ruang sampel.</p>
+        <br>
+        <p style="padding-left:15px">Misalkan : </p>
+        <p style="padding-left:15px">A = kejadian bahwa muncul mata genap.</p>
+        <p style="padding-left:15px">B = kejadian bahwa muncul mata ganjil.</p>
+        <p style="padding-left:15px">C = kejadian bahwa muncul mata prima.</p>
+        <p style="padding-left:15px">Maka : </p>
+        <p style="padding-left:15px">A = {2,4,6}, B = {1,3,5}, C = {2,3,5}.</p>
+        <p style="padding-left:15px">Sedangkan kejadian yang sederhana adalah kejadian yang terdiri atas satu titik sample.</p>
+        <p style="padding-left:15px">Misalkan : </p>
+        <p style="padding-left:15px">D = kejadian bahwa muncul mata prima yang genap. Maka D = {2}.</p>
 
         <h4>B. PELUANG SUATU KEJADIAN</h4>
-        <P style="padding-left:15px">Peluang suatu kejadian berkaitan dengan pembahasan tentang ruang sampel dan kejadian. Peluang suatu kejadian adalah perbandingan antara jumlah suatu kejadian n(A) dan semua kemungkinan yang ada n(S). Secara matematis, rumus peluang suatu kejadian A pada ruang sampel S adalah sebagai berikut.</P>
-        <p style="padding-left:15px">P(A) = peluang terjadinya A</p>
+        <P style="padding-left:15px">Peluang suatu kejadian berkaitan dengan pembahasan tentang ruang sampel dan kejadian. Peluang suatu kejadian adalah perbandingan antara jumlah suatu kejadian n(A) dan semua kemungkinan yang ada n(S).</P>
+        <p style="padding-left:15px">P(A) = peluang terjadinya A.</p>
         <p style="padding-left:15px">n(A) = banyaknya elemen kejadian A.</p>
         <p style="padding-left:15px">n(S) = banyaknya elemen ruang sampel S.</p>
         <br>
@@ -108,33 +118,33 @@ const sidebarData = [
         <p class="text-center">0 ≤ P(A) ≤ 1</p>
         <p style="padding-left:15px">Contoh peluang 0 dan 1 adalah sebagai berikut.</p>
         <ul>
-          <li>P(A) = 0 atau kejadian yang mustahil terjadi, misalnya laki-laki melahirkan</li>
-          <li>P(A) = 1 atau kejadian yang pasti terjadi, misalnya Matahari terbit dari timur</li>
+          <li>P(A) = 0 atau kejadian yang mustahil terjadi, misalnya laki-laki melahirkan.</li>
+          <li>P(A) = 1 atau kejadian yang pasti terjadi, misalnya Matahari terbit dari timur.</li>
         </ul>
 
         <h4>C. FREKUENSI HARAPAN</h4>
         <P style="padding-left:15px">Frekuensi harapan adalah besarnya peluang suatu kejadian yang terjadi secara berulang-ulang (percobaan berulang). Jika suatu percobaan dilakukan sebanyak N kali dan nilai kemungkinan terjadinya kejadian A pada setiap percobaan adalah P(A) maka frekuensi harapan dari kejadian A adalah: </P>
 
-        <p class="text-center">0 ≤ P(A) ≤ 1</p>
+        <p class="text-center">FH = P(A) x n</p>
         <p style="padding-left:15px">FH = frekuensi harapan kejadian.</p>
         <p style="padding-left:15px">P(A) = peluang kejadian A.</p>
-        <p style="padding-left:15px">n = banyaknya kejadian atau percobaan</p>
+        <p style="padding-left:15px">n = banyaknya kejadian atau percobaan.</p>
         <br>
         <p style="padding-left:15px"><strong>Contoh:</strong></p>
         <p style="padding-left:15px">Frekuensi harapan muncul mata dadu 5 pada pelemparan sebuah dadu sebanyak 150 kali adalah?</p>
 
         <br>
         <p style="padding-left:15px">Diketahui:</p>
-        <p style="padding-left:15px">A = (5), maka n(A) = 1</p>
-        <p style="padding-left:15px">S = (1,2,3,4,5,6), maka n(S) = 6</p>
-        <p style="padding-left:15px">n = 150</p>
+        <p style="padding-left:15px">A = (5), maka n(A) = 1.</p>
+        <p style="padding-left:15px">S = (1,2,3,4,5,6), maka n(S) = 6.</p>
+        <p style="padding-left:15px">n = 150.</p>
 
         <br>
         <p style="padding-left:15px">Jawab:</p>
-        <p style="padding-left:15px">P(A) = n(A)/n(S)</p>
-        <p style="padding-left:15px">P(A) = 1/6</p>
-        <p style="padding-left:15px">FH = P(A) x n</p>
-        <p style="padding-left:15px">FH = FH = 1/6 x 150 = 25</p>
+        <p style="padding-left:15px">P(A) = n(A)/n(S).</p>
+        <p style="padding-left:15px">P(A) = 1/6.</p>
+        <p style="padding-left:15px">FH = P(A) x n.</p>
+        <p style="padding-left:15px">FH = FH = 1/6 x 150 = 25.</p>
 
         <br>
         <p>Jadi dalam frekuensi harapan muncul mata dadu 5 pada pelemparan sebanyak 150 kali adalah 25 kali.</p>
